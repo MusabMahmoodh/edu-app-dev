@@ -1,5 +1,5 @@
-import { jsx, Image, Box, Heading, Text } from "theme-ui";
-
+import { jsx, Box, Heading, Text } from "theme-ui";
+import Image from "next/image";
 export default function FeatureCardColumn({
   src,
   altText = "default alt text",

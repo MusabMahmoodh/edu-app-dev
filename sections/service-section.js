@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 
-import {
-  jsx,
-  Container,
-  Box,
-  Grid,
-  Text,
-  Heading,
-  Button,
-  Image,
-} from "theme-ui";
+import { jsx, Container, Box, Grid, Text, Heading, Button } from "theme-ui";
+import Image from "next/image";
 import { keyframes } from "@emotion/core";
 import TextFeature from "components/text-feature";
 import ModalVideo from "react-modal-video";

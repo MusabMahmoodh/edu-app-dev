@@ -1,5 +1,5 @@
 import { jsx } from "theme-ui";
-
+import Image from "next/image";
 import { Container, Box, Card, Heading, Text } from "theme-ui";
 import { MdArrowForward } from "react-icons/md";
 import HeroImg from "assets/hero_img.png";
@@ -11,6 +11,7 @@ export default function Banner() {
   const [value, setValue] = useState();
   return (
     <section sx={styles.banner} id="home">
+      <Image src={HeroImg} layout={"fill"} objectFit={"cover"} />
       <Container sx={styles.containerBox}>
         <Box sx={styles.contentBox}></Box>
         <Box sx={styles.formContainer}>
@@ -62,7 +63,7 @@ const styles = {
     pt: ["120px", "125px", "125px", "130px", null, null],
     pb: [2, null, 0, null, 2, 0, null, 5],
     position: "relative",
-    backgroundImage: `url(${HeroImg})`,
+
     zIndex: 2,
     minHeight: "100vh",
     height: "calc(0.5609 * 100vw)",
@@ -80,7 +81,7 @@ const styles = {
   },
   formContainer: {
     width: ["100%", null, null, "48%", null, null, null, null],
-
+    zIndex: "8888",
     flexShrink: 0,
     mb: [7, null, 60, 0],
   },

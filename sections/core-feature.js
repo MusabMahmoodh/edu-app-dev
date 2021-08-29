@@ -1,4 +1,5 @@
-import { jsx, Container, Box, Image } from "theme-ui";
+import { jsx, Container, Box } from "theme-ui";
+import Image from "next/image";
 import TextFeature from "components/text-feature";
 import { FaAppStore, FaGooglePlay } from "react-icons/fa";
 import FeatureThumb from "assets/core-feature.png";

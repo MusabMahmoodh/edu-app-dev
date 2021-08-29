@@ -1,4 +1,5 @@
-import { jsx, Image, Text } from "theme-ui";
+import { jsx, Text } from "theme-ui";
+import Image from "next/image";
 import { Link } from "components/link";
 
 export default function Logo({ src, ...rest }) {

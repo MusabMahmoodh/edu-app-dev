@@ -1,4 +1,5 @@
-import { jsx, Box, Container, Image, Text } from "theme-ui";
+import { jsx, Box, Container, Text } from "theme-ui";
+import Image from "next/image";
 import { Link } from "components/link";
 import data from "./footer.data";
 import FooterLogo from "assets/logo.svg";

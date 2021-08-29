@@ -1,4 +1,5 @@
-import { jsx, Container, Heading, Text, Box, Image } from "theme-ui";
+import { jsx, Container, Heading, Text, Box } from "theme-ui";
+import Image from "next/image";
 import SectionHeader from "components/section-header";
 import Rating from "components/rating";
 import ButtonGroup from "components/button-group";
