@@ -26,16 +26,12 @@ export default function CoreFeature() {
             btnURL={data.btnURL}
           />
           <Box sx={styles.btnGroup}>
-            <IconButton
-              text="Get it on IOS"
-              width={["100%", null, null, "48%"]}
-              icon={<FaAppStore />}
-            />
-            <IconButton
-              text="Get it on Android"
-              width={["100%", null, null, "48%"]}
-              icon={<FaGooglePlay />}
-            />
+            <Box sx={{ width: ["100%", null, null, "48%"], mb: "10px" }}>
+              <IconButton text="Get it on IOS" icon={<FaAppStore />} />
+            </Box>
+            <Box sx={{ width: ["100%", null, null, "48%"] }}>
+              <IconButton text="Get it on Android" icon={<FaGooglePlay />} />
+            </Box>
           </Box>
         </Box>
         <Box sx={styles.thumbnail}>
