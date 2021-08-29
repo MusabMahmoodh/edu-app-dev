@@ -67,10 +67,6 @@ const styles = {
     zIndex: 2,
     minHeight: "100vh",
     height: "calc(0.5609 * 100vw)",
-
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
   },
   containerBox: {
     display: "flex",

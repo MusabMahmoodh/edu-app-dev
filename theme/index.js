@@ -96,6 +96,7 @@ export default {
       pb: [8, null, 9, null, null, 10, null, "170px"],
     },
     coreFeature: {
+      pt: [5, null, 9, null, null, 2],
       pb: [8, null, 9, null, null, 10, null, "170px"],
       overflow: "hidden",
     },
