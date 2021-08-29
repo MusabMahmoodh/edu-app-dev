@@ -15,7 +15,8 @@ export default function Banner() {
         src={HeroImg}
         layout={"fill"}
         objectFit={"cover"}
-        priority={true}
+        priority="true"
+        loading="eager"
       />
       <Container sx={styles.containerBox}>
         <Box sx={styles.contentBox}></Box>
