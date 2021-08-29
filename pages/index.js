@@ -1,23 +1,34 @@
-import Head from 'next/head'
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+import React from "react";
+import { ThemeProvider } from "theme-ui";
+import theme from "theme";
 
-export default function Home() {
+import SEO from "components/seo";
+import Layout from "layout/layout";
+import Banner from "../sections/main/banner";
+import KeyFeature from "../sections/key-feature";
+import ServiceSection from "../sections/service-section";
+import Feature from "../sections/feature";
+import CoreFeature from "../sections/core-feature";
+import WorkFlow from "../sections/workflow";
+import Package from "../sections/package";
+import TeamSection from "../sections/team-section";
+import TestimonialCard from "../sections/testimonial";
+
+export default function IndexPage() {
   return (
-    <div className="container">
-      <Head>
-        <title>Next.js Starter!</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <Header title="Welcome to my app!" />
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-      </main>
-
-      <Footer />
-    </div>
-  )
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <SEO title="EduApp" />
+        <Banner />
+        <KeyFeature />
+        {/* <ServiceSection /> */}
+        {/* <Feature /> */}
+        <CoreFeature />
+        {/* <WorkFlow /> */}
+        {/* <Package /> */}
+        {/* <TeamSection /> */}
+        {/* <TestimonialCard /> */}
+      </Layout>
+    </ThemeProvider>
+  );
 }
