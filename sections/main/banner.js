@@ -11,7 +11,12 @@ export default function Banner() {
   const [value, setValue] = useState();
   return (
     <section sx={styles.banner} id="home">
-      <Image src={HeroImg} layout={"fill"} objectFit={"cover"} />
+      <Image
+        src={HeroImg}
+        layout={"fill"}
+        objectFit={"cover"}
+        priority={true}
+      />
       <Container sx={styles.containerBox}>
         <Box sx={styles.contentBox}></Box>
         <Box sx={styles.formContainer}>
