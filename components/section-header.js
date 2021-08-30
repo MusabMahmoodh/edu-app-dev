@@ -4,6 +4,14 @@ import { Box, Text, Heading } from "theme-ui";
 export default function SectionHeader({ title, slogan, isWhite }) {
   return (
     <Box sx={{ variant: "sectionHeader" }}>
+      <Heading
+        as="h2"
+        sx={{
+          variant: "sectionHeader.title",
+          color: isWhite ? "white" : "primary",
+        }}>
+        {title}
+      </Heading>
       <Text
         as="p"
         sx={{
@@ -13,14 +21,6 @@ export default function SectionHeader({ title, slogan, isWhite }) {
         }}>
         {slogan}
       </Text>
-      <Heading
-        as="h2"
-        sx={{
-          variant: "sectionHeader.title",
-          color: isWhite ? "white" : "primary",
-        }}>
-        {title}
-      </Heading>
     </Box>
   );
 }

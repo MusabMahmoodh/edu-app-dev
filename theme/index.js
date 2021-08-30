@@ -12,19 +12,20 @@ export default {
     yellow: "#FFA740", // border color
     primary: "#3F5CE7", // primary button and link color
     secondary: "#556DF6", // secondary color - can be used for hover states
+    ash: "#DCDCDC",
     muted: "#E4E4E4", // muted color
     accent: "#609", // a contrast color for emphasizing UI
 
     // highlight	a background color for highlighting text
-    modes: {
-      dark: {
-        text: "#fff",
-        background: "#000",
-        primary: "#0cf",
-        secondary: "#09c",
-        muted: "#111",
-      },
-    },
+    // modes: {
+    //   dark: {
+    //     text: "#fff",
+    //     background: "#000",
+    //     primary: "#0cf",
+    //     secondary: "#09c",
+    //     muted: "#111",
+    //   },
+    // },
   },
   breakpoints: [
     "480px",
@@ -119,7 +120,7 @@ export default {
     flexDirection: "column",
     alignItems: "center",
     mt: ["-3px", null, -1],
-    marginBottom: ["50px", null, "60px", null, null, "65px", null, "80px"],
+    marginBottom: ["40px", null, "50px", null, null, "55px", null, "80px"],
     mx: "auto",
     title: {
       fontSize: ["24px", null, "28px", null, null, "32px", null, "36px"],
@@ -128,6 +129,7 @@ export default {
       textAlign: "center",
       fontWeight: "700",
       letterSpacing: "-.5px",
+      mb: 2,
     },
 
     subTitle: {
@@ -135,7 +137,7 @@ export default {
       color: "primary",
       textAlign: "center",
       letterSpacing: ["1.5px", null, "2px"],
-      textTransform: "uppercase",
+      // textTransform: "uppercase",
       fontWeight: "700",
       mb: 2,
       lineHeight: 1.5,

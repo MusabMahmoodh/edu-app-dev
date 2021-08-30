@@ -7,215 +7,65 @@ import ButtonGroup from "components/button-group";
 import SectionHeader from "components/section-header";
 import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
 
-const packages = {
-  monthly: [
+const data = {
+  blogs: [
     {
       id: 1,
-      name: "Free Plan",
-      description: "For Small teams or office",
-      buttonText: "Start free trail",
-      priceWithUnit: "$0",
-      points: [
-        {
-          id: 1,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Drag & Drop Builder",
-          isAvailable: true,
-        },
-        {
-          id: 2,
-          icon: <IoIosCheckmarkCircle />,
-          text: "1,000's of Templates",
-          isAvailable: true,
-        },
-        {
-          id: 3,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Blog Support Tools",
-          isAvailable: true,
-        },
-        {
-          id: 4,
-          icon: <IoIosCloseCircle />,
-          text: "eCommerce Store ",
-          isAvailable: true,
-        },
-      ],
+      name: "Title: Lorem Ipsum is simply dummy text.",
+      title: "Category Title",
+      header: "Recommended",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
     },
     {
       id: 2,
-      name: "Business king",
-      description: "For Enterprise business",
-      priceWithUnit: "$15",
-      buttonText: "Create account",
-      anotherOption: "Or Start 14 Days trail",
-      points: [
-        {
-          id: 1,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Drag & Drop Builder",
-          isAvailable: true,
-        },
-        {
-          id: 2,
-          icon: <IoIosCheckmarkCircle />,
-          text: "1,000's of Templates",
-          isAvailable: true,
-        },
-        {
-          id: 3,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Blog Support Tools",
-          isAvailable: true,
-        },
-        {
-          id: 4,
-          icon: <IoIosCheckmarkCircle />,
-          text: "eCommerce Store ",
-          isAvailable: true,
-        },
-      ],
+      name: "Title: Lorem Ipsum is simply dummy text.",
+      title: "Category Title",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
     },
     {
       id: 3,
-      header: "Suggested",
-      headerIcon: <IoIosCheckmarkCircle />,
-      name: "Pro Master",
-      description: "For pro level developers",
-      priceWithUnit: "$24",
-      buttonText: "Create account",
-      anotherOption: "Or Start 14 Days trail",
-      points: [
-        {
-          id: 1,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Drag & Drop Builder",
-          isAvailable: true,
-        },
-        {
-          id: 2,
-          icon: <IoIosCheckmarkCircle />,
-          text: "1,000's of Templates",
-          isAvailable: true,
-        },
-        {
-          id: 3,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Blog Support Tools",
-          isAvailable: true,
-        },
-        {
-          id: 4,
-          icon: <IoIosCheckmarkCircle />,
-          text: "eCommerce Store ",
-          isAvailable: true,
-        },
-      ],
-    },
-  ],
-  annual: [
-    {
-      id: 1,
-      name: "Free Plan",
-      description: "For Small teams or office",
-      buttonText: "Start free trail",
-      priceWithUnit: "$0",
-      points: [
-        {
-          id: 1,
-          icon: <IoIosCheckmarkCircle />,
-          text: "1,000's of Templates",
-          isAvailable: true,
-        },
-        {
-          id: 2,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Drag & Drop Builder",
-          isAvailable: true,
-        },
-        {
-          id: 3,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Blog Support Tools",
-          isAvailable: true,
-        },
-        {
-          id: 4,
-          icon: <IoIosCloseCircle />,
-          text: "eCommerce Store ",
-          isAvailable: true,
-        },
-      ],
+      name: "Title: Lorem Ipsum is simply dummy text.",
+      title: "Category Title",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
     },
     {
-      id: 2,
-      name: "Business king",
-      description: "For Enterprise business",
-      priceWithUnit: "$25",
-      buttonText: "Create account",
-      anotherOption: "Or Start 10 Days trail",
-      points: [
-        {
-          id: 1,
-          icon: <IoIosCheckmarkCircle />,
-          text: "eCommerce Store",
-          isAvailable: true,
-        },
-        {
-          id: 2,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Blog Support Tools",
-          isAvailable: true,
-        },
-        {
-          id: 3,
-          icon: <IoIosCheckmarkCircle />,
-          text: "1,000's of Templates",
-          isAvailable: true,
-        },
-        {
-          id: 4,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Drag & Drop Builder ",
-          isAvailable: true,
-        },
-      ],
+      id: 4,
+      header: "Recommended",
+      name: "Title: Lorem Ipsum is simply dummy text.",
+      title: "Category Title",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
     },
     {
-      id: 3,
-      header: "Suggested",
-      headerIcon: <IoIosCheckmarkCircle />,
-      name: "Pro Master",
-      description: "For pro level developers",
-      priceWithUnit: "$39",
-      buttonText: "Create account",
-      anotherOption: "Or Start 10 Days trail",
-      points: [
-        {
-          id: 1,
-          icon: <IoIosCheckmarkCircle />,
-          text: "eCommerce Store",
-          isAvailable: true,
-        },
-        {
-          id: 2,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Blog Support Tools",
-          isAvailable: true,
-        },
-        {
-          id: 3,
-          icon: <IoIosCheckmarkCircle />,
-          text: "1,000's of Templates",
-          isAvailable: true,
-        },
-        {
-          id: 4,
-          icon: <IoIosCheckmarkCircle />,
-          text: "Drag & Drop Builder ",
-          isAvailable: true,
-        },
-      ],
+      id: 5,
+      name: "Title: Lorem Ipsum is simply dummy text.",
+      title: "Category Title",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
+    },
+    {
+      id: 6,
+      name: "Title: Lorem Ipsum is simply dummy text.",
+      title: "Category Title",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
+    },
+    {
+      id: 7,
+      name: "Title: Lorem Ipsum is simply dummy text.",
+      title: "Category Title",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
+    },
+    {
+      id: 8,
+      name: "Title: Lorem Ipsum is simply dummy text.",
+      title: "Category Title",
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
     },
   ],
 };
@@ -223,34 +73,34 @@ const packages = {
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    draggable: false,
+    items: 4,
+    paritialVisibilityGutter: 60,
   },
   tablet: {
-    breakpoint: { max: 1023, min: 640 },
+    breakpoint: { max: 1024, min: 464 },
     items: 2,
-    draggable: true,
+    paritialVisibilityGutter: 50,
   },
   mobile: {
-    breakpoint: { max: 639, min: 0 },
+    breakpoint: { max: 464, min: 0 },
     items: 1,
-    draggable: true,
+    paritialVisibilityGutter: 30,
   },
 };
 
 export default function Package() {
-  const { monthly, annual } = packages;
+  const { blogs } = data;
 
   const sliderParams = {
     additionalTransfrom: 0,
-    arrows: false,
+    arrows: true,
     autoPlaySpeed: 3000,
     centerMode: false,
     className: "",
     slidesToSlide: 1,
     items: 3,
     containerClass: "carousel-container",
-    customButtonGroup: <ButtonGroup />,
+    // customButtonGroup: <ButtonGroup />,
     dotListClass: "",
     focusOnSelect: false,
     infinite: false,
@@ -264,7 +114,26 @@ export default function Package() {
     sliderClass: "",
   };
 
-  return <h1>Package</h1>;
+  return (
+    <section sx={{ variant: "section.pricing" }} id="pricing">
+      <Container sx={styles.blogsContainer}>
+        <SectionHeader
+          slogan="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
+          title="From the Blog "
+        />
+
+        <Box sx={styles.pricingWrapper} className="pricing__wrapper">
+          <Carousel {...sliderParams}>
+            {blogs.map((plan) => (
+              <Box key={plan.id} sx={styles.pricingItem}>
+                <PriceCard data={plan} />
+              </Box>
+            ))}
+          </Carousel>
+        </Box>
+      </Container>
+    </section>
+  );
 }
 
 const fadeIn = keyframes`
@@ -286,9 +155,16 @@ const fadeIn2 = keyframes`
   }
 `;
 const styles = {
+  blogsContainer: {
+    backgroundColor: "ash",
+    pt: "20px ",
+    pb: "80px",
+    borderRadius: 20,
+  },
   pricingWrapper: {
     mb: "-40px",
     mt: "-40px",
+
     mx: -3,
     display: "flex",
     flexDirection: "column",
