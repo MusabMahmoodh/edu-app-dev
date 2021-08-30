@@ -88,7 +88,7 @@ export default {
   section: {
     keyFeature: {
       pt: [8, null, 9, null, null, 10],
-      pb: ["90px", null, 9, null, null, 10, null, "165px"],
+      pb: ["30px", null, 9, null, null, 10, null, "40px"],
     },
     feature: {
       pb: [8, null, 9, null, null, 10, null, "170px"],
@@ -97,8 +97,8 @@ export default {
       pb: [8, null, 9, null, null, 10, null, "170px"],
     },
     coreFeature: {
-      pt: [5, null, 9, null, null, 2],
-      pb: [8, null, 9, null, null, 10, null, "170px"],
+      pt: [5, null],
+      pb: [8, null],
       overflow: "hidden",
     },
     testimonial: {
@@ -110,8 +110,8 @@ export default {
       pb: ["90px", null, 9, null, null, 10, null, "150px"],
     },
     pricing: {
-      pt: [8, null, 9, null, null, 10, null, "180px"],
-      pb: ["90px", null, 9, null, null, 10, null, "180px"],
+      pt: [3, null],
+      pb: [3, null],
     },
   },
   sectionHeader: {
