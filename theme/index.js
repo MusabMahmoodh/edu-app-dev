@@ -67,8 +67,9 @@ export default {
         "1020px",
         "1200px",
         null,
-        "1366px",
+        "1310px",
       ],
+      px: [4, 6],
     },
     header: {
       color: "#02073E",
