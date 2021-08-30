@@ -123,7 +123,7 @@ export default function Package() {
         />
 
         <Box sx={styles.pricingWrapper} className="pricing__wrapper">
-          <Carousel {...sliderParams}>
+          <Carousel {...sliderParams} ssr partialVisbile>
             {blogs.map((plan) => (
               <Box key={plan.id} sx={styles.pricingItem}>
                 <PriceCard data={plan} />

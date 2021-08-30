@@ -41,7 +41,7 @@ const styles = {
     position: "relative",
     transition: "all 0.3s",
     p: "0 0 2px 0",
-    width: "250px",
+    width: ["100%", "75%", "100%"],
     backgroundColor: "background",
     // mb: "40px",
     mt: "40px",
