@@ -57,19 +57,21 @@ const styles = {
     position: "absolute",
     top: 0,
     left: 0,
+
     backgroundColor: "transparent",
+    zIndex: 9999,
     transition: "all 0.4s ease",
     animation: `${positionAnim} 0.4s ease`,
-    "&.sticky": {
-      position: "fixed",
-      backgroundColor: "background",
-      color: "#000000",
-      boxShadow: "0 1px 2px rgba(0, 0, 0, 0.06)",
-      py: 3,
-      "nev > a": {
-        color: "text",
-      },
-    },
+    // "&.sticky": {
+    //   position: "fixed",
+    //   backgroundColor: "background",
+    //   color: "#000000",
+    //   boxShadow: "0 1px 2px rgba(0, 0, 0, 0.06)",
+    //   py: 3,
+    //   "nev > a": {
+    //     color: "text",
+    //   },
+    // },
   },
   container: {
     display: "flex",
@@ -90,12 +92,12 @@ const styles = {
       lineHeight: "1.2",
       transition: "all 0.15s",
 
-      "&:hover": {
-        color: "success",
-      },
-      "&.active": {
-        color: "success",
-      },
+      // "&:hover": {
+      //   color: "success",
+      // },
+      // "&.active": {
+      //   color: "success",
+      // },
     },
   },
 };

@@ -73,7 +73,7 @@ const data = {
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 4,
+    items: 3,
     paritialVisibilityGutter: 60,
   },
   tablet: {
@@ -102,6 +102,7 @@ export default function Package() {
     containerClass: "carousel-container",
     // customButtonGroup: <ButtonGroup />,
     dotListClass: "",
+
     focusOnSelect: false,
     infinite: false,
     keyBoardControl: false,
@@ -123,7 +124,7 @@ export default function Package() {
         />
 
         <Box sx={styles.pricingWrapper} className="pricing__wrapper">
-          <Carousel {...sliderParams} ssr partialVisbile>
+          <Carousel {...sliderParams} ssr>
             {blogs.map((plan) => (
               <Box key={plan.id} sx={styles.pricingItem}>
                 <PriceCard data={plan} />
@@ -164,7 +165,7 @@ const styles = {
   pricingWrapper: {
     mb: "-40px",
     mt: "-40px",
-
+    px: [4, 6],
     mx: -3,
     display: "flex",
     flexDirection: "column",

@@ -1,11 +1,11 @@
 export default {
   // example colors with dark mode
   colors: {
-    text: "#343D48", // body color and primary color
+    text: "#000000", // body color and primary color
     text_secondary: "#02073E", // secondary body color
     heading: "#0F2137", // primary heading color
     heading_secondary: "#808080", // heading color
-    background: "#FFFFFF", // body background color
+    background: "#F3F5F9", // body background color
     background_secondary: "#F9FBFD", // secondary background color
     border_color: "#E5ECF4", // border color
     success: "#61D6CC",
@@ -67,9 +67,8 @@ export default {
         "1020px",
         "1200px",
         null,
-        "1310px",
+        "1366px",
       ],
-      px: [4, 6],
     },
     header: {
       color: "#02073E",
@@ -83,7 +82,9 @@ export default {
       alignItems: "center",
       justifyContent: "space-between",
     },
-    main: {},
+    main: {
+      position: "relative",
+    },
   },
   section: {
     keyFeature: {
@@ -115,7 +116,7 @@ export default {
     },
   },
   sectionHeader: {
-    width: ["100%", null, "540px"],
+    width: ["100%", null, "940px"],
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -124,17 +125,17 @@ export default {
     mx: "auto",
     title: {
       fontSize: ["24px", null, "28px", null, null, "32px", null, "36px"],
-      color: "heading",
+      color: "text",
       lineHeight: [1.3, null, null, 1.25],
       textAlign: "center",
       fontWeight: "700",
       letterSpacing: "-.5px",
-      mb: 2,
+      mb: 20,
     },
 
     subTitle: {
       fontSize: [0, "13px", null, "14px"],
-      color: "primary",
+      color: "text",
       textAlign: "center",
       letterSpacing: ["1.5px", null, "2px"],
       // textTransform: "uppercase",

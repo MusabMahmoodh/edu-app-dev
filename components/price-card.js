@@ -10,8 +10,14 @@ export default function PriceCard({
       sx={styles.pricingBox}>
       {header && <Text sx={styles.header}>{header}</Text>}
       <Image
-        sx={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
-        src="https://source.unsplash.com/random/250x150"
+        src="https://source.unsplash.com/random"
+        sx={{
+          height: "150px",
+          width: "100%",
+          objectFit: "cover",
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+        }}
       />
       <Box sx={{ p: "0 15px" }}>
         <Box className="package__header" sx={styles.cardHeader}>
@@ -40,12 +46,13 @@ const styles = {
     borderRadius: 20,
     position: "relative",
     transition: "all 0.3s",
-    p: "0 0 2px 0",
-    width: ["100%", "75%", "100%"],
+
+    width: "100%",
     backgroundColor: "background",
     // mb: "40px",
     mt: "40px",
-    // mx: [0, "auto", 0],
+    p: 0,
+
     "&:before": {
       position: "absolute",
       content: "''",

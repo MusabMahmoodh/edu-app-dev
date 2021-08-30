@@ -59,7 +59,8 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     flexWrap: ["wrap", null, null, "nowrap"],
-    pb: [0, 7, 0, null, 7],
+
+    p: 0,
   },
   btnGroup: {
     display: "flex",
@@ -67,12 +68,13 @@ const styles = {
     justifyContent: "space-between",
   },
   contentBox: {
-    flexShrink: 0,
-    px: [0, null, "30px", 0],
+    flexShrink: 1,
+
     textAlign: ["center", null, null, "left"],
-    width: ["100%", "80%", null, 340, 400, 430, null, 485],
+    width: ["100%", null, null, "50%"],
     pb: ["50px", "60px", null, 0],
-    mx: ["auto", null, null, 0],
+    mx: 0,
+    ml: 0,
     ".description": {
       pr: [0, null, 6, 7, 6],
     },
@@ -80,6 +82,7 @@ const styles = {
   thumbnail: {
     display: "inline-flex",
     position: "relative",
+
     mr: "auto",
     ml: ["auto", null, null, null, 7],
     "> img": {

@@ -20,7 +20,7 @@ export default function IndexPage() {
       <Layout>
         <SEO title="EduApp" />
         <Banner />
-        <KeyFeature />
+        {/* <KeyFeature /> */}
         {/* <ServiceSection /> */}
         {/* <Feature /> */}
         <CoreFeature />

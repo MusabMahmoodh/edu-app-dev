@@ -28,25 +28,46 @@ export default function Banner() {
             <Text as="p" variant="heroSecondary">
               Enter your mobile number to <br /> register or login App
             </Text>
-            <Box sx={{ margin: ["20px 0", null, null, null, "50px 0"] }}>
+            <Box
+              sx={{
+                margin: ["20px 0", null, null, null, "50px 0"],
+
+                maxWidth: "330px",
+                width: "100%",
+              }}>
               <PhoneInput
-                onlyCountries={["lk"]}
+                // onlyCountries={["lk"]}
                 country="lk"
                 value={value}
                 onChange={setValue}
-                disableDropdown={true}
+                // disableDropdown={true}
                 countryCodeEditable={false}
                 placeholder="Mobile Number"
                 containerStyle={{
+                  maxWidth: "600px",
                   width: "100%",
-                  maxWidth: "300px",
+                  borderRadius: "16px",
+                  boxShadow:
+                    "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
                 }}
                 inputStyle={{
                   width: "100%",
-                  height: "35px",
+                  height: "42px",
                   fontSize: "13px",
                   paddingLeft: "48px",
-                  borderRadius: "5px",
+                  borderRadius: "16px",
+                  border: "none",
+                  borderTopRightRadius: "16px",
+                  borderBottomRightRadius: "16px",
+                  backgroundColor: "#fff",
+                }}
+                buttonStyle={{
+                  height: "42px",
+                  fontSize: "13px",
+                  border: "none",
+                  borderTopLeftRadius: "16px",
+                  borderBottomLeftRadius: "16px",
+                  backgroundColor: "#fff",
                 }}
               />
             </Box>
@@ -83,7 +104,11 @@ const styles = {
   },
   formContainer: {
     width: ["100%", null, null, "48%", null, null, null, null],
+
     zIndex: "8888",
+
+    maxWidth: "600px",
+
     flexShrink: 0,
     mb: [7, null, 60, 0],
   },
@@ -99,10 +124,12 @@ const styles = {
     display: "flex",
     // alignItems: "flex-start",
     justifyContent: "center",
+
     alignItems: "center",
     flexDirection: "column",
     transition: "all 0.3s",
     backgroundColor: "background",
-    padding: ["30px 12px", null, null, null, , "81px 64px", null],
+    borderRadius: "16px",
+    padding: [" 12px 30px", null, null, null, , "56px 64px ", null],
   },
 };
