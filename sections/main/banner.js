@@ -164,6 +164,7 @@ export default function Banner() {
         priority="true"
         loading="eager"
       />
+      <div id="recaptcha-container"></div>
       <Container sx={styles.containerBox}>
         <Box sx={styles.contentBox}></Box>
         <Box sx={styles.formContainer}>

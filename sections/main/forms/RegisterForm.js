@@ -2,7 +2,7 @@ import IconButton from "@components/buttons/icon-button";
 import React from "react";
 import PhoneInput from "react-phone-input-2";
 import { MdArrowForward } from "react-icons/md";
-import { Box, Label, Input, Button } from "theme-ui";
+import { Box, Label, Input, Button, Text } from "theme-ui";
 const RegisterForm = ({ regData, setRegData, onRegisterSubmit }) => {
   return (
     <React.Fragment>

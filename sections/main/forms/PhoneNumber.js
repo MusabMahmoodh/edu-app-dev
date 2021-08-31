@@ -17,7 +17,6 @@ const PhoneNumberForm = ({ mobNumber, setMobNumber, onSignInSubmit, ref }) => {
           width: "100%",
         }}>
         <form>
-          <div id="recaptcha-container" ref={ref}></div>
           <PhoneInput
             // onlyCountries={["lk"]}
             country="lk"
