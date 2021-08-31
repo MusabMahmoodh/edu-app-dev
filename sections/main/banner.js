@@ -1,44 +1,50 @@
 import { jsx } from "theme-ui";
 import Image from "next/image";
-import { Container, Box, Card, Heading, Text } from "theme-ui";
-import { MdArrowForward } from "react-icons/md";
+import { Container, Box, Card, Heading } from "theme-ui";
+
 import HeroImg from "assets/hero_img.png";
-import IconButton from "components/buttons/icon-button";
-import { useEffect, useState } from "react";
-import PhoneInput from "react-phone-input-2";
+
+import { useEffect, useRef, useState } from "react";
+
 // import { db } from "../../firebase/initFirebase";
-import {
-  getAuth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-} from "firebase/auth";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { auth, createUser, fetchUsers } from "../../firebase/initFirebase";
 
+import PhoneNumberForm from "./forms/PhoneNumber";
+import OTPForm from "./forms/OTPForm";
 export default function Banner() {
-  const [value, setValue] = useState();
+  const [mobNumber, setMobNumber] = useState();
+  const [formState, setFormState] = useState(1);
+  const [OTP, setOTP] = useState("");
+  const element = useRef(null);
 
-  const setUpRecaptcha = () => {
-    const auth = getAuth();
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      "recaptcha-container",
-      {
-        size: "invisible",
-        callback: (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-          onSignInSubmit();
+  const setUpRecaptcha = async () => {
+    try {
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: (response) => {
+            // reCAPTCHA solved, allow signInWithPhoneNumber.
+            onSignInSubmit((next = true));
+          },
         },
-      },
-      auth
-    );
+        auth
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const onSignInSubmit = () => {
+  const onSignInSubmit = async (next) => {
     // e.preventDefault();
-    console.log("Clicked");
-    setUpRecaptcha();
+    if (!next) {
+      setUpRecaptcha();
+    }
 
-    const phoneNumber = `+${value}`;
+    const phoneNumber = `+${mobNumber}`;
     const appVerifier = window.recaptchaVerifier;
-    const auth = getAuth();
+
     signInWithPhoneNumber(auth, phoneNumber, appVerifier)
       .then((confirmationResult) => {
         // SMS sent. Prompt user to type the code from the message, then sign the
@@ -46,28 +52,35 @@ export default function Banner() {
         window.confirmationResult = confirmationResult;
         // ...
         // const code = getCodeFromUserInput();
-        const code = window.prompt("Enter OTP");
-        confirmationResult
-          .confirm(code)
-          .then((result) => {
-            // User signed in successfully.
-            const user = result.user;
-            // ...
-            console.log(user, "User is signed in");
-          })
-          .catch((error) => {
-            // User couldn't sign in (bad verification code?)
-            // ...
-            console.log(error);
-          });
       })
       .catch((error) => {
         // Error; SMS not sent
         // ...
+        window.recaptchaVerifier?.render().then(function (widgetId) {
+          grecaptcha.reset(widgetId);
+        });
         console.log(error);
       });
   };
-  // firebase();
+
+  const onOTPsubmit = () => {
+    window.confirmationResult
+      .confirm(OTP)
+      .then(async (result) => {
+        // User signed in successfully.
+        const user = result.user;
+        // createUser({ uid: user.uid, name: "testAdd" });
+        fetchUsers(user.uid);
+      })
+      .catch((error) => {
+        // User couldn't sign in (bad verification code?)
+        // ...
+        window.recaptchaVerifier?.render().then(function (widgetId) {
+          grecaptcha.reset(widgetId);
+        });
+        console.log(error);
+      });
+  };
   return (
     <section sx={styles.banner} id="home">
       <Image
@@ -84,62 +97,13 @@ export default function Banner() {
             <Heading as="h1" variant="heroPrimary">
               Ready to rock’in the class?
             </Heading>
-            <Text as="p" variant="heroSecondary">
-              Enter your mobile number to <br /> register or login App
-            </Text>
-            <Box
-              sx={{
-                margin: ["20px 0", null, null, null, "50px 0"],
-
-                maxWidth: "330px",
-                width: "100%",
-              }}>
-              <form>
-                <div id="recaptcha-container"></div>
-                <PhoneInput
-                  // onlyCountries={["lk"]}
-                  country="lk"
-                  value={value}
-                  onChange={setValue}
-                  // disableDropdown={true}
-                  countryCodeEditable={false}
-                  placeholder="Mobile Number"
-                  containerStyle={{
-                    maxWidth: "600px",
-                    width: "100%",
-                    borderRadius: "16px",
-                    boxShadow:
-                      "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-                  }}
-                  inputStyle={{
-                    width: "100%",
-                    height: "42px",
-                    fontSize: "13px",
-                    paddingLeft: "48px",
-                    borderRadius: "16px",
-                    border: "none",
-                    borderTopRightRadius: "16px",
-                    borderBottomRightRadius: "16px",
-                    backgroundColor: "#fff",
-                  }}
-                  buttonStyle={{
-                    height: "42px",
-                    fontSize: "13px",
-                    border: "none",
-                    borderTopLeftRadius: "16px",
-                    borderBottomLeftRadius: "16px",
-                    backgroundColor: "#fff",
-                  }}
-                />
-              </form>
-            </Box>
-            <Box onClick={() => onSignInSubmit()}>
-              <IconButton
-                text="Next"
-                // width={["100%", "200px", "70%", "300px", null]}
-                icon={<MdArrowForward />}
-              />
-            </Box>
+            <PhoneNumberForm
+              mobNumber={mobNumber}
+              setMobNumber={setMobNumber}
+              onSignInSubmit={onSignInSubmit}
+              ref={element}
+            />
+            <OTPForm OTP={OTP} setOTP={setOTP} confirmOTP={onOTPsubmit} />
           </Card>
         </Box>
       </Container>
