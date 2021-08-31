@@ -1,6 +1,6 @@
 import { jsx } from "theme-ui";
 import Image from "next/image";
-import { Container, Box, Card, Heading } from "theme-ui";
+import { Container, Box, Card, Heading, Button } from "theme-ui";
 
 import HeroImg from "assets/hero_img.png";
 
@@ -11,6 +11,7 @@ import {
   onAuthStateChanged,
   RecaptchaVerifier,
   signInWithPhoneNumber,
+  signOut,
 } from "firebase/auth";
 import { auth, createUser, fetchUser } from "../../firebase/initFirebase";
 
@@ -27,6 +28,16 @@ export default function Banner() {
     lastName: "",
   });
   const element = useRef(null);
+
+  const userSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setFormState(1);
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
 
   const setUpRecaptcha = async () => {
     try {
@@ -190,7 +201,10 @@ export default function Banner() {
                 onRegisterSubmit={registerUser}
               />
             ) : (
-              <h3>User logged in</h3>
+              <>
+                <h3>User logged in</h3>
+                <Button onClick={userSignOut}>Sign Out</Button>
+              </>
             )}
           </Card>
         </Box>
