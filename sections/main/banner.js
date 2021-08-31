@@ -59,6 +59,7 @@ export default function Banner() {
         // SMS sent. Prompt user to type the code from the message, then sign the
         // user in with confirmationResult.confirm(code).
         window.confirmationResult = confirmationResult;
+        setFormState(2);
         // ...
         // const code = getCodeFromUserInput();
       })
@@ -80,6 +81,7 @@ export default function Banner() {
         const user = result.user;
 
         fetchUser(user.uid);
+        setFormState(3);
       })
       .catch((error) => {
         // User couldn't sign in (bad verification code?)
@@ -92,20 +94,48 @@ export default function Banner() {
   };
 
   const registerUser = () => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
 
-        createUser(uid, { ...regData, phoneNumber: `+${mobNumber}` });
+        const isUserCreated = await createUser(uid, {
+          ...regData,
+          phoneNumber: `+${mobNumber}`,
+        });
+        if (isUserCreated) {
+          setFormState(4);
+        } else {
+          setFormState(1);
+        }
+        // ...
+      } else {
+      }
+    });
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        const isUserCreated = await fetchUser(uid);
+        console.log(isUserCreated);
+        if (isUserCreated) {
+          setFormState(4);
+        } else {
+          setFormState(3);
+        }
         // ...
       } else {
         // User is signed out
         // ...
       }
     });
-  };
+    return () => unsubscribe();
+  }, []);
   return (
     <section sx={styles.banner} id="home">
       <Image
@@ -122,18 +152,24 @@ export default function Banner() {
             <Heading as="h1" variant="heroPrimary">
               Ready to rock’in the class?
             </Heading>
-            <PhoneNumberForm
-              mobNumber={mobNumber}
-              setMobNumber={setMobNumber}
-              onSignInSubmit={onSignInSubmit}
-              ref={element}
-            />
-            <OTPForm OTP={OTP} setOTP={setOTP} confirmOTP={onOTPsubmit} />
-            <RegisterForm
-              regData={regData}
-              setRegData={setRegData}
-              onRegisterSubmit={registerUser}
-            />
+            {formState === 1 ? (
+              <PhoneNumberForm
+                mobNumber={mobNumber}
+                setMobNumber={setMobNumber}
+                onSignInSubmit={onSignInSubmit}
+                ref={element}
+              />
+            ) : formState === 2 ? (
+              <OTPForm OTP={OTP} setOTP={setOTP} confirmOTP={onOTPsubmit} />
+            ) : formState === 3 ? (
+              <RegisterForm
+                regData={regData}
+                setRegData={setRegData}
+                onRegisterSubmit={registerUser}
+              />
+            ) : (
+              <h3>User logged in</h3>
+            )}
           </Card>
         </Box>
       </Container>

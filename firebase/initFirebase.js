@@ -35,25 +35,25 @@ export const fetchUser = async (id) => {
   const docRef = doc(db, "users", id);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
+    console.log(docSnap.data());
     return docSnap.data();
   } else {
     // doc.data() will be undefined in this case
+    console.log("No such document!");
     return null;
   }
 };
 
 export const createUser = async (id, data) => {
-  console.log("here");
   try {
     const userRef = collection(db, "users");
-    console.log(id, ",", data);
+
     await setDoc(doc(userRef, id), {
       ...data,
     });
-    console.log("user created");
+
     return true;
   } catch (error) {
-    console.log(error);
     return error.message;
   }
 };
