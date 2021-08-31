@@ -7,7 +7,7 @@ const OTPForm = ({ OTP, setOTP, confirmOTP }) => {
   return (
     <React.Fragment>
       <Text as="p" variant="heroSecondary">
-        Enter your mobile number to <br /> register or login App
+        Enter the OTP send to your mobile number
       </Text>
       <Box
         sx={{

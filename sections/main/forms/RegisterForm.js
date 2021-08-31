@@ -6,6 +6,9 @@ import { Box, Label, Input, Button } from "theme-ui";
 const RegisterForm = ({ regData, setRegData, onRegisterSubmit }) => {
   return (
     <React.Fragment>
+      <Text as="p" variant="heroSecondary">
+        Register yourself with us!
+      </Text>
       <Box
         as="form"
         onSubmit={(e) => {

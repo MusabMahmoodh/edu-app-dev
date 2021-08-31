@@ -62,12 +62,14 @@ export default function Banner() {
         // user in with confirmationResult.confirm(code).
         window.confirmationResult = confirmationResult;
         setFormState(2);
+        setIsLoading(false);
         // ...
         // const code = getCodeFromUserInput();
       })
       .catch((error) => {
         // Error; SMS not sent
         // ...
+        setIsLoading(false);
         window.recaptchaVerifier?.render().then(function (widgetId) {
           grecaptcha.reset(widgetId);
         });
@@ -86,10 +88,12 @@ export default function Banner() {
 
         fetchUser(user.uid);
         setFormState(3);
+        setIsLoading(false);
       })
       .catch((error) => {
         // User couldn't sign in (bad verification code?)
         // ...
+        setIsLoading(false);
         window.recaptchaVerifier?.render().then(function (widgetId) {
           grecaptcha.reset(widgetId);
         });
@@ -111,12 +115,15 @@ export default function Banner() {
           phoneNumber: `+${mobNumber}`,
         });
         if (isUserCreated) {
+          setIsLoading(false);
           setFormState(4);
         } else {
+          setIsLoading(false);
           setFormState(1);
         }
         // ...
       } else {
+        setIsLoading(false);
       }
     });
     setIsLoading(false);
@@ -137,6 +144,7 @@ export default function Banner() {
           setFormState(3);
           setIsLoading(false);
         }
+        setIsLoading(false);
         // ...
       } else {
         // User is signed out
