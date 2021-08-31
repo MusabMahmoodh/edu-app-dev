@@ -20,6 +20,7 @@ import RegisterForm from "./forms/RegisterForm";
 export default function Banner() {
   const [mobNumber, setMobNumber] = useState();
   const [formState, setFormState] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
   const [OTP, setOTP] = useState("");
   const [regData, setRegData] = useState({
     firstName: "",
@@ -46,6 +47,7 @@ export default function Banner() {
   };
 
   const onSignInSubmit = async (next) => {
+    setIsLoading(true);
     // e.preventDefault();
     if (!next) {
       setUpRecaptcha();
@@ -71,9 +73,11 @@ export default function Banner() {
         });
         console.log(error);
       });
+    setIsLoading(false);
   };
 
   const onOTPsubmit = () => {
+    setIsLoading(true);
     window.confirmationResult
       .confirm(OTP)
       .then(async (result) => {
@@ -91,9 +95,11 @@ export default function Banner() {
         });
         console.log(error);
       });
+    setIsLoading(false);
   };
 
   const registerUser = () => {
+    setIsLoading(true);
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -113,6 +119,7 @@ export default function Banner() {
       } else {
       }
     });
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -122,18 +129,22 @@ export default function Banner() {
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
         const isUserCreated = await fetchUser(uid);
-        console.log(isUserCreated);
+
         if (isUserCreated) {
           setFormState(4);
+          setIsLoading(false);
         } else {
           setFormState(3);
+          setIsLoading(false);
         }
         // ...
       } else {
         // User is signed out
         // ...
+        setIsLoading(false);
       }
     });
+
     return () => unsubscribe();
   }, []);
   return (
@@ -152,7 +163,9 @@ export default function Banner() {
             <Heading as="h1" variant="heroPrimary">
               Ready to rock’in the class?
             </Heading>
-            {formState === 1 ? (
+            {isLoading ? (
+              <h5>Loading...</h5>
+            ) : formState === 1 ? (
               <PhoneNumberForm
                 mobNumber={mobNumber}
                 setMobNumber={setMobNumber}
