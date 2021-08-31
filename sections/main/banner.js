@@ -6,9 +6,67 @@ import HeroImg from "assets/hero_img.png";
 import IconButton from "components/buttons/icon-button";
 import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
+// import { db } from "../../firebase/initFirebase";
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from "firebase/auth";
 
 export default function Banner() {
   const [value, setValue] = useState();
+  const setUpRecaptcha = () => {
+    const auth = getAuth();
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      "recaptcha-container",
+      {
+        size: "invisible",
+        callback: (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          onSignInSubmit();
+        },
+      },
+      auth
+    );
+  };
+
+  const onSignInSubmit = () => {
+    // e.preventDefault();
+    console.log("Clicked");
+    setUpRecaptcha();
+    const phoneNumber = "+94768306127";
+    // const phoneNumber = getPhoneNumberFromUserInput();
+    const appVerifier = window.recaptchaVerifier;
+    const auth = getAuth();
+    signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+      .then((confirmationResult) => {
+        // SMS sent. Prompt user to type the code from the message, then sign the
+        // user in with confirmationResult.confirm(code).
+        window.confirmationResult = confirmationResult;
+        // ...
+        // const code = getCodeFromUserInput();
+        const code = window.prompt("Enter OTP");
+        confirmationResult
+          .confirm(code)
+          .then((result) => {
+            // User signed in successfully.
+            const user = result.user;
+            // ...
+            console.log(user, "User is signed in");
+          })
+          .catch((error) => {
+            // User couldn't sign in (bad verification code?)
+            // ...
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        // Error; SMS not sent
+        // ...
+        console.log(error);
+      });
+  };
+  // firebase();
   return (
     <section sx={styles.banner} id="home">
       <Image
@@ -35,43 +93,46 @@ export default function Banner() {
                 maxWidth: "330px",
                 width: "100%",
               }}>
-              <PhoneInput
-                // onlyCountries={["lk"]}
-                country="lk"
-                value={value}
-                onChange={setValue}
-                // disableDropdown={true}
-                countryCodeEditable={false}
-                placeholder="Mobile Number"
-                containerStyle={{
-                  maxWidth: "600px",
-                  width: "100%",
-                  borderRadius: "16px",
-                  boxShadow:
-                    "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
-                }}
-                inputStyle={{
-                  width: "100%",
-                  height: "42px",
-                  fontSize: "13px",
-                  paddingLeft: "48px",
-                  borderRadius: "16px",
-                  border: "none",
-                  borderTopRightRadius: "16px",
-                  borderBottomRightRadius: "16px",
-                  backgroundColor: "#fff",
-                }}
-                buttonStyle={{
-                  height: "42px",
-                  fontSize: "13px",
-                  border: "none",
-                  borderTopLeftRadius: "16px",
-                  borderBottomLeftRadius: "16px",
-                  backgroundColor: "#fff",
-                }}
-              />
+              <form>
+                <div id="recaptcha-container"></div>
+                <PhoneInput
+                  // onlyCountries={["lk"]}
+                  country="lk"
+                  value={value}
+                  onChange={setValue}
+                  // disableDropdown={true}
+                  countryCodeEditable={false}
+                  placeholder="Mobile Number"
+                  containerStyle={{
+                    maxWidth: "600px",
+                    width: "100%",
+                    borderRadius: "16px",
+                    boxShadow:
+                      "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+                  }}
+                  inputStyle={{
+                    width: "100%",
+                    height: "42px",
+                    fontSize: "13px",
+                    paddingLeft: "48px",
+                    borderRadius: "16px",
+                    border: "none",
+                    borderTopRightRadius: "16px",
+                    borderBottomRightRadius: "16px",
+                    backgroundColor: "#fff",
+                  }}
+                  buttonStyle={{
+                    height: "42px",
+                    fontSize: "13px",
+                    border: "none",
+                    borderTopLeftRadius: "16px",
+                    borderBottomLeftRadius: "16px",
+                    backgroundColor: "#fff",
+                  }}
+                />
+              </form>
             </Box>
-            <Box>
+            <Box onClick={() => onSignInSubmit()}>
               <IconButton
                 text="Next"
                 // width={["100%", "200px", "70%", "300px", null]}
