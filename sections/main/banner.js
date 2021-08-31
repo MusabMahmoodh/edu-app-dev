@@ -7,15 +7,24 @@ import HeroImg from "assets/hero_img.png";
 import { useEffect, useRef, useState } from "react";
 
 // import { db } from "../../firebase/initFirebase";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { auth, createUser, fetchUsers } from "../../firebase/initFirebase";
+import {
+  onAuthStateChanged,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from "firebase/auth";
+import { auth, createUser, fetchUser } from "../../firebase/initFirebase";
 
 import PhoneNumberForm from "./forms/PhoneNumber";
 import OTPForm from "./forms/OTPForm";
+import RegisterForm from "./forms/RegisterForm";
 export default function Banner() {
   const [mobNumber, setMobNumber] = useState();
   const [formState, setFormState] = useState(1);
   const [OTP, setOTP] = useState("");
+  const [regData, setRegData] = useState({
+    firstName: "",
+    lastName: "",
+  });
   const element = useRef(null);
 
   const setUpRecaptcha = async () => {
@@ -69,8 +78,8 @@ export default function Banner() {
       .then(async (result) => {
         // User signed in successfully.
         const user = result.user;
-        // createUser({ uid: user.uid, name: "testAdd" });
-        fetchUsers(user.uid);
+
+        fetchUser(user.uid);
       })
       .catch((error) => {
         // User couldn't sign in (bad verification code?)
@@ -80,6 +89,22 @@ export default function Banner() {
         });
         console.log(error);
       });
+  };
+
+  const registerUser = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+
+        createUser(uid, { ...regData, phoneNumber: `+${mobNumber}` });
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
   };
   return (
     <section sx={styles.banner} id="home">
@@ -104,6 +129,11 @@ export default function Banner() {
               ref={element}
             />
             <OTPForm OTP={OTP} setOTP={setOTP} confirmOTP={onOTPsubmit} />
+            <RegisterForm
+              regData={regData}
+              setRegData={setRegData}
+              onRegisterSubmit={registerUser}
+            />
           </Card>
         </Box>
       </Container>

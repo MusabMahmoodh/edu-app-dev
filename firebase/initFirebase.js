@@ -31,12 +31,10 @@ export const auth = getAuth(app);
 const db = getFirestore(app);
 
 //CRUD
-export const fetchUsers = async (id) => {
+export const fetchUser = async (id) => {
   const docRef = doc(db, "users", id);
   const docSnap = await getDoc(docRef);
-  console.log("fetching");
   if (docSnap.exists()) {
-    console.log("fetching", docSnap.data());
     return docSnap.data();
   } else {
     // doc.data() will be undefined in this case
@@ -44,16 +42,18 @@ export const fetchUsers = async (id) => {
   }
 };
 
-export const createUser = async (data) => {
+export const createUser = async (id, data) => {
+  console.log("here");
   try {
     const userRef = collection(db, "users");
-
-    const newUser = await setDoc(doc(userRef, data.uid), {
-      name: data.name,
+    console.log(id, ",", data);
+    await setDoc(doc(userRef, id), {
+      ...data,
     });
-
+    console.log("user created");
     return true;
   } catch (error) {
+    console.log(error);
     return error.message;
   }
 };
