@@ -4,7 +4,7 @@ import { Container, Box, Card, Heading, Text } from "theme-ui";
 import { MdArrowForward } from "react-icons/md";
 import HeroImg from "assets/hero_img.png";
 import IconButton from "components/buttons/icon-button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 // import { db } from "../../firebase/initFirebase";
 import {
@@ -15,6 +15,7 @@ import {
 
 export default function Banner() {
   const [value, setValue] = useState();
+
   const setUpRecaptcha = () => {
     const auth = getAuth();
     window.recaptchaVerifier = new RecaptchaVerifier(
@@ -34,8 +35,8 @@ export default function Banner() {
     // e.preventDefault();
     console.log("Clicked");
     setUpRecaptcha();
-    const phoneNumber = "+94768306127";
-    // const phoneNumber = getPhoneNumberFromUserInput();
+
+    const phoneNumber = `+${value}`;
     const appVerifier = window.recaptchaVerifier;
     const auth = getAuth();
     signInWithPhoneNumber(auth, phoneNumber, appVerifier)
