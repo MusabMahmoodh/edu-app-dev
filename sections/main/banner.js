@@ -4,21 +4,25 @@ import { Container, Box, Card, Heading, Button } from "theme-ui";
 
 import HeroImg from "assets/hero_img.png";
 
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 
 // import { db } from "../../firebase/initFirebase";
 import {
   onAuthStateChanged,
   RecaptchaVerifier,
   signInWithPhoneNumber,
-  signOut,
 } from "firebase/auth";
-import { auth, createUser, fetchUser } from "../../firebase/initFirebase";
-
+import { auth, createUser, fetchUser, db } from "../../firebase/initFirebase";
 import PhoneNumberForm from "./forms/PhoneNumber";
 import OTPForm from "./forms/OTPForm";
 import RegisterForm from "./forms/RegisterForm";
-export default function Banner() {
+
+const Recaptcha = memo((props) => {
+  console.log("Recaptcha created");
+  return <div id="recaptcha-container"></div>;
+});
+
+export default function Banner({ user, router }) {
   const [mobNumber, setMobNumber] = useState();
   const [formState, setFormState] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,16 +32,6 @@ export default function Banner() {
     lastName: "",
   });
   const element = useRef(null);
-
-  const userSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        setFormState(1);
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
 
   const setUpRecaptcha = async () => {
     try {
@@ -97,9 +91,15 @@ export default function Banner() {
         // User signed in successfully.
         const user = result.user;
 
-        fetchUser(user.uid);
-        setFormState(3);
-        setIsLoading(false);
+        const isUserCreated = await fetchUser(user.uid);
+        console.log("is user created", isUserCreated);
+        // if (!isUserCreated) {
+        //   setFormState(3);
+        //   setIsLoading(false);
+        // } else {
+        await router.push("/app");
+        //   setIsLoading(false);
+        // }
       })
       .catch((error) => {
         // User couldn't sign in (bad verification code?)
@@ -126,8 +126,8 @@ export default function Banner() {
           phoneNumber: `+${mobNumber}`,
         });
         if (isUserCreated) {
+          router.push("/app");
           setIsLoading(false);
-          setFormState(4);
         } else {
           setIsLoading(false);
           setFormState(1);
@@ -140,32 +140,17 @@ export default function Banner() {
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        const isUserCreated = await fetchUser(uid);
+  useEffect(async () => {
+    if (user) {
+      setFormState(3);
+      setIsLoading(false);
 
-        if (isUserCreated) {
-          setFormState(4);
-          setIsLoading(false);
-        } else {
-          setFormState(3);
-          setIsLoading(false);
-        }
-        setIsLoading(false);
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        setIsLoading(false);
-      }
-    });
+      // ..
+    } else {
+      setIsLoading(false);
+    }
+  }, [user]);
 
-    return () => unsubscribe();
-  }, []);
   return (
     <section sx={styles.banner} id="home">
       <Image
@@ -175,7 +160,7 @@ export default function Banner() {
         priority="true"
         loading="eager"
       />
-      <div id="recaptcha-container"></div>
+      <Recaptcha />
       <Container sx={styles.containerBox}>
         <Box sx={styles.contentBox}></Box>
         <Box sx={styles.formContainer}>
@@ -201,10 +186,7 @@ export default function Banner() {
                 onRegisterSubmit={registerUser}
               />
             ) : (
-              <>
-                <h3>User logged in</h3>
-                <Button onClick={userSignOut}>Sign Out</Button>
-              </>
+              <></>
             )}
           </Card>
         </Box>
