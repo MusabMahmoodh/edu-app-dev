@@ -23,17 +23,16 @@ export default function IndexPage() {
       if (!loading && user) {
         const uid = user.uid;
         const isUserCreated = await fetchUser(uid);
-        // if (isUserCreated) {
-        try {
-          await router.push("/app");
-        } catch (err) {
-          console.log(err);
+        if (isUserCreated) {
+          try {
+            await router.push("/app");
+          } catch (err) {
+            console.log(err);
+          }
+          setCheckUserLoading(false);
+        } else {
+          setCheckUserLoading(false);
         }
-
-        setCheckUserLoading(false);
-        // } else {
-        //   setCheckUserLoading(false);
-        // }
       } else if (!loading && !user) {
         setCheckUserLoading(false);
       }
