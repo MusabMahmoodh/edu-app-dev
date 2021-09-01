@@ -19,25 +19,29 @@ export default function IndexPage() {
   const router = useRouter();
   useEffect(() => {
     const getUserStatus = async () => {
+      console.log("Triggered");
       if (!loading && user) {
         const uid = user.uid;
         const isUserCreated = await fetchUser(uid);
-        if (isUserCreated) {
+        // if (isUserCreated) {
+        try {
           await router.push("/app");
-
-          setCheckUserLoading(false);
-        } else {
-          setCheckUserLoading(false);
+        } catch (err) {
+          console.log(err);
         }
+
+        setCheckUserLoading(false);
+        // } else {
+        //   setCheckUserLoading(false);
+        // }
       } else if (!loading && !user) {
         setCheckUserLoading(false);
       }
     };
-    getUserStatus();
+    !loading && getUserStatus();
   }, [loading, user]);
 
   if (!checkUserLoading) {
-    console.log("State changed");
     return (
       <ThemeProvider theme={theme}>
         <SEO title="Home" />

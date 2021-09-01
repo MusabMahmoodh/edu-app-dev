@@ -90,16 +90,6 @@ export default function Banner({ user, router }) {
       .then(async (result) => {
         // User signed in successfully.
         const user = result.user;
-
-        const isUserCreated = await fetchUser(user.uid);
-        console.log("is user created", isUserCreated);
-        // if (!isUserCreated) {
-        //   setFormState(3);
-        //   setIsLoading(false);
-        // } else {
-        await router.push("/app");
-        //   setIsLoading(false);
-        // }
       })
       .catch((error) => {
         // User couldn't sign in (bad verification code?)
