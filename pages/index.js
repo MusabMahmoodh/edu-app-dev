@@ -18,8 +18,9 @@ export default function IndexPage() {
   const [checkUserLoading, setCheckUserLoading] = useState(true);
   const router = useRouter();
   useEffect(() => {
+    console.log(user);
+    setCheckUserLoading(true);
     const getUserStatus = async () => {
-      console.log("Triggered");
       if (!loading && user) {
         const uid = user.uid;
         const isUserCreated = await fetchUser(uid);
