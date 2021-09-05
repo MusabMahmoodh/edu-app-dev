@@ -17,6 +17,7 @@
     "isomorphic-unfetch": "^3.1.0",
     "next": "^11.1.0",
     "next-firebase-auth": "^0.13.3",
+    "payhere-js-sdk": "^1.0.1",
     "rc-drawer": "^4.4.1",
     "react": "^17.0.2",
     "react-custom-scrollbars": "^4.2.1",
